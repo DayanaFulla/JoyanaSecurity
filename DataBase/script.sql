@@ -1,5 +1,5 @@
 /*    ==Scripting Parameters==
-
+	Dayana Fulla 
     Source Server Version : SQL Server 2008 (10.0.6241)
     Source Database Engine Edition : Microsoft SQL Server Express Edition
     Source Database Engine Type : Standalone SQL Server
@@ -7,7 +7,7 @@
     Target Server Version : SQL Server 2017
     Target Database Engine Edition : Microsoft SQL Server Standard Edition
     Target Database Engine Type : Standalone SQL Server
-*/
+*/       
 
 USE [JoyanaSecurityDB]
 GO
