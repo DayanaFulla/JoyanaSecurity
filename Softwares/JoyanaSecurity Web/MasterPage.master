@@ -1,0 +1,72 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="Style/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="Style/css/Style.css" />
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Joyana Security</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+
+                    <li role="presentation">
+                        <asp:HyperLink runat="server"
+                            ForeColor="#212529"
+                            NavigateUrl="~/Registro.aspx"
+                            Text="Registro">
+                        </asp:HyperLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="mainContent" style="background: #f2f2f2;">
+        <div class="container">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>        
+    </div>
+
+    
+    <footer class="page-footer">
+        <div class="container">
+            <h2>Joyana Security
+                <p class="copyright pull-right">
+                    &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+
+                </p>
+            </h2>
+        </div>
+    </footer>
+
+    <%--<style>
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /*height: 40px;
+            color: white;*/
+        }
+    </style>--%>
+</body>
+</html>

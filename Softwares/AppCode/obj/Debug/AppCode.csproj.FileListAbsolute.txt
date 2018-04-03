@@ -1,0 +1,6 @@
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\bin\Debug\AppCode.dll.config
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\bin\Debug\AppCode.dll
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\bin\Debug\AppCode.pdb
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\obj\Debug\AppCode.csprojResolveAssemblyReference.cache
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\obj\Debug\AppCode.dll
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\obj\Debug\AppCode.pdb
