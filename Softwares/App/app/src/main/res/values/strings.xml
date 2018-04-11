@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">JoyanaSecurity</string>
+    <string name="tab_text_1"></string>
+    <string name="tab_text_2"></string>
+    <string name="tab_text_3"></string>
+    <string name="action_settings">Ajustes</string>
+    <string name="lb_estado">estado</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_login">Ingresar</string>
+
+    <!-- Strings related to login -->
+    <string name="lb_email">Ingrese su E-mail</string>
+    <string name="lb_password">Ingrese su password</string>
+    <string name="lb_opcion">No esta registrado? Registrese Aqui!</string>
+    <string name="lb_ingresar">Ingresar</string>
+    <string name="lb_entrar">Entrar</string>
+</resources>
