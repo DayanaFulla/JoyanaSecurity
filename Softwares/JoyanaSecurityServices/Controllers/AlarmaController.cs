@@ -12,32 +12,14 @@ namespace JoyanaSecurityServices.Controllers
     [RoutePrefix("api/alarma")]
     public class AlarmaController : ApiController
     {
-        //POST api/values
-        [HttpPost]
-        public IHttpActionResult PostAlarma([FromBody] Alarma obj)  //PARA ACTUALIZAR LOS DATOS DE LA ALARMA
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    AlarmaBRL.UpdateAlarma(obj);
-                    return CreatedAtRoute("PostAlarma", new { id = obj.IdAlarma }, obj);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return BadRequest();
-        }
+        //POST api/values        
 
         [HttpGet]
-        [Route("ActivarAlarma/{codigo}")]
-        public HttpResponseMessage ActivarAlarma(string codigo)
+        [Route("ActivarAlarma/{idAlarma}")]
+        public HttpResponseMessage ActivarAlarma(string idAlarma)
         {
             HttpResponseMessage msg = null;
-            Alarma obj = AlarmaBRL.GetAlarmaByCodigo(codigo);
+            Alarma obj = AlarmaBRL.GetAlarmaById(Int32.Parse(idAlarma));
             
             if (obj == null)
             {
@@ -55,12 +37,12 @@ namespace JoyanaSecurityServices.Controllers
         }
 
         [HttpGet]
-        [Route("GetAlarmaByCodigo/{codigo}")]
-        public HttpResponseMessage GetAlarmaByCodigo(string codigo)
+        [Route("GetAlarmaById/{idAlarma}")]
+        public HttpResponseMessage GetAlarmaByCodigo(string idAlarma)
         {
             HttpResponseMessage msg = null;
 
-            Alarma obj = AlarmaBRL.GetAlarmaByCodigo(codigo);
+            Alarma obj = AlarmaBRL.GetAlarmaById(Int32.Parse(idAlarma));
 
             if (obj == null)
             {

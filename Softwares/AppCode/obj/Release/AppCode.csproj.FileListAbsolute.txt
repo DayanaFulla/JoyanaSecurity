@@ -1,0 +1,5 @@
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\bin\Release\AppCode.dll.config
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\bin\Release\AppCode.dll
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\bin\Release\AppCode.pdb
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\obj\Release\AppCode.dll
+E:\Carpetas Joc 7u7\7mo SEMESTRE\ELECTIVA DE HARDWARE\PROYECTO FINAL\Softwares\AppCode\obj\Release\AppCode.pdb
