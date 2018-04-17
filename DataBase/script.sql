@@ -1,5 +1,5 @@
 /*    ==Scripting Parameters==
-	Dayana Fulla   
+
     Source Server Version : SQL Server 2008 (10.0.6241)
     Source Database Engine Edition : Microsoft SQL Server Express Edition
     Source Database Engine Type : Standalone SQL Server
@@ -7,21 +7,26 @@
     Target Server Version : SQL Server 2017
     Target Database Engine Edition : Microsoft SQL Server Standard Edition
     Target Database Engine Type : Standalone SQL Server
-*/       
+*/
 
 USE [JoyanaSecurityDB]
 GO
-/****** Object:  Table [dbo].[tblAlarma]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  User [IIS APPPOOL\.NET v4.5 Classic]    Script Date: 17/04/2018 16:03:57 ******/
+CREATE USER [IIS APPPOOL\.NET v4.5 Classic] FOR LOGIN [IIS APPPOOL\.NET v4.5 Classic]
+GO
+ALTER ROLE [db_owner] ADD MEMBER [IIS APPPOOL\.NET v4.5 Classic]
+GO
+/****** Object:  Table [dbo].[tblAlarma]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tblAlarma](
 	[idAlarma] [int] IDENTITY(1,1) NOT NULL,
-	[codigo] [nvarchar](20) NOT NULL,
 	[contraseña] [nvarchar](100) NOT NULL,
 	[latitud] [nvarchar](20) NOT NULL,
 	[longitud] [nvarchar](20) NOT NULL,
+	[isActive] [bit] NOT NULL,
 	[idUsuario] [int] NULL,
  CONSTRAINT [PK_tblAlarma] PRIMARY KEY CLUSTERED 
 (
@@ -29,7 +34,7 @@ CREATE TABLE [dbo].[tblAlarma](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblReporte]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  Table [dbo].[tblReporte]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -44,7 +49,7 @@ CREATE TABLE [dbo].[tblReporte](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tblUsuario]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  Table [dbo].[tblUsuario]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -72,31 +77,7 @@ REFERENCES [dbo].[tblAlarma] ([idAlarma])
 GO
 ALTER TABLE [dbo].[tblReporte] CHECK CONSTRAINT [FK_tblReporte_tblAlarma]
 GO
-/****** Object:  StoredProcedure [dbo].[ALA_GetAlarmaByCodigo]    Script Date: 22/03/2018 22:41:24 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
--- =============================================
--- Author:		José Manuel Cadima Aponte
--- Create date: 20/03/2018
--- Description:	Obtener Alarma por Código
--- =============================================
-CREATE PROCEDURE [dbo].[ALA_GetAlarmaByCodigo]
-	-- Add the parameters for the stored procedure here
-	@codigo		NVARCHAR(20)
-
-AS
-BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-    -- Insert statements for procedure here
-	SELECT * FROM tblAlarma WHERE [codigo] = @codigo
-END
-GO
-/****** Object:  StoredProcedure [dbo].[ALA_GetAlarmaById]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[ALA_GetAlarmaById]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -120,7 +101,30 @@ BEGIN
 	SELECT * FROM tblAlarma WHERE [idAlarma] = @idAlarma
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ALA_GetAllAlarma]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[ALA_GetAlarmaByUsuarioId]    Script Date: 17/04/2018 16:03:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		José Manuel Cadima Aponte
+-- Create date: 27/03/2018
+-- Description:	Obtiene la alarma por el idUsuario
+-- =============================================
+CREATE PROCEDURE [dbo].[ALA_GetAlarmaByUsuarioId]
+	-- Add the parameters for the stored procedure here
+	@idUsuario		INT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM [dbo].[tblAlarma] WHERE [idUsuario] = @idUsuario
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ALA_GetAllAlarma]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -143,7 +147,7 @@ BEGIN
 	SELECT * FROM tblAlarma
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ALA_InsertarAlarma]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[ALA_InsertarAlarma]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,10 +159,10 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[ALA_InsertarAlarma]
 	-- Add the parameters for the stored procedure here
-	@codigo			NVARCHAR(20),
 	@contraseña		NVARCHAR(100),
 	@latitud		NVARCHAR(20),
 	@longitud		NVARCHAR(20),
+	@isActive		BIT,
 	@idUsuario		INT,
 	
 	@idAlarma		INT OUTPUT 
@@ -170,23 +174,23 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	INSERT INTO [dbo].[tblAlarma]
-           ([codigo]
-           ,[contraseña]
+	INSERT INTO [dbo].[tblAlarma]           
+           ([contraseña]
            ,[latitud]
            ,[longitud]
+		   ,[isActive]
            ,[idUsuario])
-     VALUES
-           (@codigo
-           ,@contraseña
+     VALUES           
+           (@contraseña
            ,@latitud
            ,@longitud
+		   ,@isActive
            ,@idUsuario)
 
 	SET @idAlarma = SCOPE_IDENTITY();
 END
 GO
-/****** Object:  StoredProcedure [dbo].[ALA_UpdateAlarma]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[ALA_UpdateAlarma]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,11 +201,11 @@ GO
 -- Description:	Actualizar Alarma
 -- =============================================
 CREATE PROCEDURE [dbo].[ALA_UpdateAlarma]
-	-- Add the parameters for the stored procedure here
-	@codigo			NVARCHAR(20),
+	-- Add the parameters for the stored procedure here	
 	@contraseña		NVARCHAR(100),
 	@latitud		NVARCHAR(20),
 	@longitud		NVARCHAR(20),
+	@isActive		BIT,
 
 	@idAlarma		INT
 	
@@ -211,23 +215,23 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 	UPDATE [dbo].[tblAlarma]
-	SET [codigo] = @codigo
-      ,[contraseña] = @contraseña
+	SET [contraseña] = @contraseña
       ,[latitud] = @latitud
       ,[longitud] = @longitud      
+	  ,[isActive] = @isActive
 	WHERE [idAlarma] = @idAlarma 
 
     -- Insert statements for procedure here
 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CLI_DeleteUsuario]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[CLI_DeleteUsuario]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
--- Author:		José Manuel Cadima Aponte
+-- Author:		<Author,,Name>
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
@@ -244,7 +248,7 @@ BEGIN
 	DELETE FROM [dbo].[tblUsuario] WHERE [idUsuario] = @idUsuario
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CLI_GetAllUsers]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[CLI_GetAllUsers]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -266,7 +270,7 @@ BEGIN
 	SELECT * FROM tblUsuario 	
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CLI_GetUserByEmail]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[CLI_GetUserByEmail]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -292,7 +296,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CLI_GetUserById]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[CLI_GetUserById]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -318,7 +322,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CLI_InsertarUsuario]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[CLI_InsertarUsuario]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -363,7 +367,7 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[CLI_UpdateUsuario]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[CLI_UpdateUsuario]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -400,7 +404,29 @@ BEGIN
 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[REP_GetLastReportByAlarma]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[REP_GetAllReports]    Script Date: 17/04/2018 16:03:58 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		José Manuel Cadima Aponte
+-- Create date: 24/03/2018
+-- Description:	Obtener todos lo reportes
+-- =============================================
+CREATE PROCEDURE [dbo].[REP_GetAllReports]
+	-- Add the parameters for the stored procedure here	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * FROM [dbo].[tblReporte]
+END
+GO
+/****** Object:  StoredProcedure [dbo].[REP_GetLastReportByAlarma]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -425,7 +451,7 @@ BEGIN
 	ORDER BY idAlarma DESC 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[REP_InsertarReporte]    Script Date: 22/03/2018 22:41:24 ******/
+/****** Object:  StoredProcedure [dbo].[REP_InsertarReporte]    Script Date: 17/04/2018 16:03:58 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
