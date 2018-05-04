@@ -1,5 +1,7 @@
 package com.version.proyectofinalelectivadehardware.joyanasecurityapp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //LOGIN
+        SharedPreferences settings = getSharedPreferences("MyApp_Settings", MODE_PRIVATE);
+        String userId = settings.getString("UserId", null);
+
+        if (userId == null || userId.equals("0")){
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            startActivity(intent);
+            return;
+        }
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
