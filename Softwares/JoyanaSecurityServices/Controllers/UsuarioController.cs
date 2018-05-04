@@ -11,13 +11,13 @@ namespace JoyanaSecurityServices.Controllers
 {
     [RoutePrefix("api/usuario")]
     public class UsuarioController : ApiController
-    {
-        [HttpGet]
-        [Route("GetUserByEmail/{email}")]
-        public HttpResponseMessage GetUserByEmail(string email)
+    {        
+        [HttpPost()]
+        [Route("Login")]
+        public HttpResponseMessage LoginUser([FromBody] Usuario objUser)
         {
             HttpResponseMessage msg = null;
-            Usuario obj = UsuarioBRL.GetUsuarioByEmail(email);
+            Usuario obj = UsuarioBRL.GetUsuarioByEmail(objUser.Email);
 
             if (obj == null)
             {
@@ -25,10 +25,30 @@ namespace JoyanaSecurityServices.Controllers
                 return msg;
             }
 
-            msg = Request.CreateResponse<Usuario>(HttpStatusCode.OK, obj);
+            if (obj.Password == objUser.Password)
+            {
+                msg = Request.CreateResponse<string>(HttpStatusCode.OK, obj.IdUsuario.ToString());
+            }
+            else
+            {
+                msg = Request.CreateResponse<string>(HttpStatusCode.OK, "no"); //PASSWORD INCORRED
+            }
 
             return msg;
         }
 
+
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public HttpResponseMessage GetAllUsers()
+        {
+            HttpResponseMessage msg = null;
+
+            List<Usuario> list = UsuarioBRL.GetAllUsers();
+
+            msg = Request.CreateResponse<List<Usuario>>(HttpStatusCode.OK, list);
+
+            return msg;
+        }
     }
 }
