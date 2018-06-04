@@ -1,4 +1,4 @@
-﻿package com.version.proyectofinalelectivadehardware.joyanasecurityapp;
+package com.version.proyectofinalelectivadehardware.joyanasecurityapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +40,17 @@ public class Login extends AppCompatActivity {
         final String email = txtEmail.getText().toString().trim();
         final String password = txtPassword.getText().toString().trim();
 
+        if (email.isEmpty()){
+            txtEmail.setError("Debe Ingresar un Correo Electrónico");
+            return;
+        }
+
+        if (password.isEmpty()){
+            txtPassword.setError("Debe Ingresar la Contraseña");
+            return;
+        }
+
+
         JSONObject jsonBody = new JSONObject();
         try{
             jsonBody.put("Email", email);
@@ -61,7 +72,6 @@ public class Login extends AppCompatActivity {
                         //String response is the return in the request POST http (show the web api for more information)
                         if (response.contains("no")) { //WHEN THE IdUsuario IS '0', THE PASSWORD IS INCORRED
                             Toast.makeText(Login.this, "Contraseña Incorrecta", Toast.LENGTH_SHORT).show();
-                            return;
                         } else { //IN OTHER CASE THE SERVER RETURN USER ID
                             //CODE FOR WRITE DATA IN SharedPreferences
                             SharedPreferences settings = getSharedPreferences("MyApp_Settings", MODE_PRIVATE);
@@ -77,10 +87,15 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        if (error.networkResponse.statusCode == 404)
-                            Toast.makeText(Login.this, "El Email ingresado no existe en el sistema", Toast.LENGTH_LONG).show();
-                        else
+                        if (error.networkResponse.statusCode == 404){
+                            txtEmail.setError("Email Incorrecto");
+                            Toast.makeText(Login.this, "Email Incorrecto", Toast.LENGTH_LONG).show();
+
+                        }
+                        else {
                             Toast.makeText(Login.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 }) {
 
@@ -96,29 +111,6 @@ public class Login extends AppCompatActivity {
 
         requestQueue.add(stringRequest);
 
-        /*
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                jsonBody,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (response == null)
-                            Toast.makeText(Login.this, "Ee nulo xd", Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(Login.this, "Response: " + response.toString(), Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(Login.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
 
-        requestQueue.add(jsonRequest);
-
-        */
     }
 }

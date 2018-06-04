@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:backgroundTint="?attr/actionModeSplitBackground"
+         android:backgroundTint="?attr/actionModeSplitBackground"
         android:onClick="Ingresar"
         android:text="@string/lb_entrar"
         android:textColor="@android:color/background_light" />

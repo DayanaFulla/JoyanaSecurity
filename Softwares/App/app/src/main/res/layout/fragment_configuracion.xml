@@ -5,12 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.version.proyectofinalelectivadehardware.joyanasecurityapp.MainActivity$PlaceholderFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp">
 
 
-    <RadioButton
-        android:id="@+id/radioButton"
+    <LinearLayout
+        android:id="@+id/CurrentPassPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RadioButton" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingrese su Contraseña:" />
+
+        <EditText
+            android:id="@+id/txtCurrentPassw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Contraseña actual"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/NewPassPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingrese su Nueva Contraseña:" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Nueva Contraseña"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Repita su Contraseña" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Repita su Contraseña"
+            android:inputType="textPassword" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/CambiarPassButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
 </LinearLayout>
