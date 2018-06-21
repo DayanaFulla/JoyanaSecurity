@@ -14,4 +14,13 @@
     <string name="lb_opcion">No esta registrado? Registrese Aqui!</string>
     <string name="lb_ingresar">Ingresar</string>
     <string name="lb_entrar">Entrar</string>
+
+    <!-- Strings related to Configuracion -->
+    <string name="lb_Confirmar">Confirmar</string>
+
+    <!-- Strings related to Estado -->
+    <string name="lb_icontrasena">Ingrese su Contraseña</string>
+    <string name="lb_contra">Contraseña</string>
+
+
 </resources>

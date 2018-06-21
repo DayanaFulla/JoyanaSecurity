@@ -10,15 +10,14 @@
     android:paddingRight="20dp"
     android:paddingTop="20dp">
 
-
     <LinearLayout
-        android:id="@+id/CurrentPassPanel"
+        android:id="@+id/ContainerActual"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_contrasenaActual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingrese su Contraseña:" />
@@ -29,50 +28,55 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Contraseña actual"
-            android:inputType="textPassword" />
+            android:inputType="numberPassword" />
+
+        <Button
+            android:id="@+id/CambiarPassButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lb_Confirmar" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/NewPassPanel"
+        android:id="@+id/ContainerNew"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_NuevaContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ingrese su Nueva Contraseña:" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/txtNewPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:ems="10"
             android:hint="Nueva Contraseña"
-            android:inputType="textPassword" />
+            android:inputType="numberPassword" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_repitaContrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Repita su Contraseña" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/txtRepitPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Repita su Contraseña"
-            android:inputType="textPassword" />
+            android:inputType="numberPassword" />
 
+        <Button
+            android:id="@+id/NewPassButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lb_Confirmar" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/CambiarPassButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
 </LinearLayout>

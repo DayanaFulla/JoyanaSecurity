@@ -6,18 +6,51 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
+    android:layout_margin="20dp"
     tools:context="com.version.proyectofinalelectivadehardware.joyanasecurityapp.MainActivity$PlaceholderFragment">
 
 
     <ImageButton
-        android:id="@+id/btn_estado"
+        android:id="@+id/btn_desactivado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
         android:background="@drawable/abierto"
         android:contentDescription="@string/lb_estado"
+        android:src="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/btn_activado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cerrado"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp"
         android:src="@android:color/transparent"
-        android:visibility="visible" />
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_icontrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lb_icontrasena"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/txt_Contrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/lb_contra"
+        android:inputType="numberPassword"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btn_Confirmar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lb_Confirmar"
+        android:visibility="gone" />
 
 </LinearLayout>

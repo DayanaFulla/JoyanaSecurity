@@ -23,6 +23,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.version.proyectofinalelectivadehardware.joyanasecurityapp.Utilities.User;
+
 public class MainActivity extends AppCompatActivity {
 
     /**
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        userId = userId.replace("\"", "");
+
+        User.getInstance().setUserIdLogin(userId);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

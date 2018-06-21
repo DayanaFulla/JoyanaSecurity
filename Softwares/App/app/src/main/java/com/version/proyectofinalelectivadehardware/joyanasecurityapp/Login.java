@@ -90,7 +90,6 @@ public class Login extends AppCompatActivity {
                         if (error.networkResponse.statusCode == 404){
                             txtEmail.setError("Email Incorrecto");
                             Toast.makeText(Login.this, "Email Incorrecto", Toast.LENGTH_LONG).show();
-
                         }
                         else {
                             Toast.makeText(Login.this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
